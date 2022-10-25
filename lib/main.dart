@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vacation_time/pages/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -34,16 +34,14 @@ class _MyAppState extends State<MyApp> {
     return ScreenUtilInit(
       minTextAdapt: true,
       designSize: const Size(390, 844),
-      builder: (context, child) => ProviderScope(
-        child: MaterialApp(
-            title: 'Vacation Time',
-            theme: ThemeData(
-              textTheme: GoogleFonts.poppinsTextTheme(),
+      builder: (context, child) => MaterialApp(
+          title: 'Vacation Time',
+          theme: ThemeData(
+            textTheme: GoogleFonts.poppinsTextTheme(),
 
-              // primarySwatch: Colors.blue,
-            ),
-            home: child),
-      ),
+            // primarySwatch: Colors.blue,
+          ),
+          home: child),
       child: const HomePage(),
     );
   }

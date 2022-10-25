@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Place {
-  const Place({
+  Place({
     required this.name,
     required this.country,
     required this.rating,
@@ -8,8 +8,10 @@ class Place {
     required this.description,
     required this.price,
     required this.image,
+    required this.id,
   });
 
+  final String id;
   final String name;
   final String country;
   final double rating;
@@ -26,6 +28,7 @@ class Place {
     String? description,
     double? price,
     String? image,
+    String? id,
   }) {
     return Place(
       name: name ?? this.name,
@@ -35,14 +38,21 @@ class Place {
       description: description ?? this.description,
       price: price ?? this.price,
       image: image ?? this.image,
+      id: id ?? this.id,
     );
+  }
+
+  @override
+  String toString() {
+    return 'Place(name: $name, country: $country, rating: $rating, isFavourite: $isFavourite, description: $description, price: $price, image: $image)';
   }
 
   @override
   bool operator ==(covariant Place other) {
     if (identical(this, other)) return true;
 
-    return other.name == name &&
+    return other.id == id &&
+        other.name == name &&
         other.country == country &&
         other.rating == rating &&
         other.isFavourite == isFavourite &&
@@ -53,17 +63,13 @@ class Place {
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return id.hashCode ^
+        name.hashCode ^
         country.hashCode ^
         rating.hashCode ^
         isFavourite.hashCode ^
         description.hashCode ^
         price.hashCode ^
         image.hashCode;
-  }
-
-  @override
-  String toString() {
-    return 'Place(name: $name, country: $country, rating: $rating, isFavourite: $isFavourite, description: $description, price: $price, image: $image)';
   }
 }

@@ -9,7 +9,7 @@ import 'package:vacation_time/utils/constants.dart';
 import 'package:vacation_time/utils/text_styles.dart';
 import 'package:vacation_time/widgets/rating_bar.dart';
 
-class Destination extends ConsumerWidget {
+class Destination extends ConsumerStatefulWidget {
   const Destination({
     Key? key,
     required this.place,
@@ -17,7 +17,26 @@ class Destination extends ConsumerWidget {
   final Place place;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<Destination> createState() => _DestinationState();
+}
+
+class _DestinationState extends ConsumerState<Destination> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // print(widget.place.hashCode);
+    // ref.listen(destinationProvider, (previous, next) {
+    //   previous?.map((e) => null);
+    //   next.map((e) => e.isFavourite);
+    // });
+    final places = ref.watch(destinationProvider);
+    final _place =
+        places.firstWhere((element) => element.id == widget.place.id);
+
     final notifier = ref.watch(destinationProvider.notifier);
     final padding = MediaQuery.of(context).viewPadding;
     return Scaffold(
@@ -25,7 +44,7 @@ class Destination extends ConsumerWidget {
         fit: StackFit.expand,
         children: [
           Image.network(
-            place.image,
+            widget.place.image,
             fit: BoxFit.cover,
           ),
           Container(
@@ -69,11 +88,12 @@ class Destination extends ConsumerWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              notifier.fav(place);
+                              notifier.fav(_place);
+                              // setState(() {});
                             },
                             child: Image.asset(
                               IconsAssets.heartRed,
-                              color: place.isFavourite ? null : Colors.black,
+                              color: _place.isFavourite ? null : Colors.black,
                             ),
                           ),
                         ],
@@ -86,7 +106,7 @@ class Destination extends ConsumerWidget {
                       Row(
                         children: [
                           Text(
-                            place.name,
+                            widget.place.name,
                             style: TextStyles.poppins(
                               color: Colors.white,
                               fontSize: 24.sp,
@@ -97,7 +117,7 @@ class Destination extends ConsumerWidget {
                           Image.asset(IconsAssets.location),
                           Constants.sizeW08,
                           Text(
-                            place.country,
+                            widget.place.country,
                             style: TextStyles.urbanist(
                               fontSize: 12,
                               color: Colors.white,
@@ -108,7 +128,7 @@ class Destination extends ConsumerWidget {
                       ),
                       Constants.sizeH24,
                       Text(
-                        place.description,
+                        widget.place.description,
                         style: TextStyles.urbanist(
                           fontSize: 12.sp,
                           color: Colors.white,
@@ -117,7 +137,7 @@ class Destination extends ConsumerWidget {
                       ),
                       Constants.sizeH20,
                       RatingBar(
-                        place: place,
+                        place: widget.place,
                         textColor: Colors.white,
                         iconColor: Colors.white,
                       ),
@@ -126,7 +146,7 @@ class Destination extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${place.price.toInt()}/person',
+                            '${widget.place.price.toInt()}/person',
                             style: TextStyles.poppins(
                               color: Colors.white,
                               fontSize: 14.sp,

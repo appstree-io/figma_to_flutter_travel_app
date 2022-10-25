@@ -8,8 +8,10 @@ final destinationProvider =
 
 class DestinationState extends StateNotifier<List<Place>> {
   DestinationState() : super(_places);
+
   void fav(Place place) {
-    state = _places.map<Place>((element) {
+    // place.copyWith(isFavourite: !place.isFavourite);
+    state = state.map<Place>((element) {
       if (element == place) {
         return element.copyWith(isFavourite: !element.isFavourite);
       }
@@ -19,7 +21,8 @@ class DestinationState extends StateNotifier<List<Place>> {
 }
 
 List<Place> _places = [
-  const Place(
+  Place(
+    id: '123',
     name: 'Kufa Beach',
     country: 'Bali, Indonesia',
     rating: 4.2,
@@ -30,7 +33,8 @@ List<Place> _places = [
     image:
         'https://images.unsplash.com/photo-1590523278191-995cbcda646b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
   ),
-  const Place(
+  Place(
+    id: '1234',
     name: 'Baga Beach',
     country: 'Goa, India',
     rating: 4.8,

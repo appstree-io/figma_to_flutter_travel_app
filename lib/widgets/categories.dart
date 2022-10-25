@@ -51,13 +51,16 @@ class Categories extends ConsumerWidget {
                 .map((place) => Padding(
                       padding: const EdgeInsets.only(right: 24),
                       child: GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: ((context) => Destination(
-                                  place: place,
-                                )),
-                          ),
-                        ),
+                        onTap: () {
+                          print(place.hashCode);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: ((context) => Destination(
+                                    place: place,
+                                  )),
+                            ),
+                          );
+                        },
                         child: Stack(
                           children: [
                             ClipRRect(
