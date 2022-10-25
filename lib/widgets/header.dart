@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vacation_time/utils/constants.dart';
 
 class Header extends StatelessWidget {
@@ -16,26 +18,34 @@ class Header extends StatelessWidget {
         Row(
           children: [
             // Constants.sizeW24,
-            const CircleAvatar(
-              maxRadius: 16,
+            CircleAvatar(
+              maxRadius: 16.r,
               backgroundColor: Colors.grey,
             ),
             Constants.sizeW10,
-            const Text('Hello, Vineetha'),
+            Text(
+              'Hello, Vineetha',
+              style: GoogleFonts.inter(
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             const Spacer(),
             Image.asset(IconsAssets.lamp),
-            Constants.sizeW24,
+            // Constants.sizeW24,
+            24.horizontalSpace
           ],
         ),
-        const SizedBox(
-          height: 35,
-        ),
-        const Text(
+        // const SizedBox(
+        //   height: 35,
+        // ),
+        25.verticalSpace,
+        Text(
           'Where do you \nwant to explore today?',
           textAlign: TextAlign.start,
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
+          style: GoogleFonts.poppins(
+            fontSize: 24.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

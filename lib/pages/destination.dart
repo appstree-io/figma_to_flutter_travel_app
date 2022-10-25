@@ -1,10 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:vacation_time/models/place.dart';
+import 'package:vacation_time/state/destination_state.dart';
 import 'package:vacation_time/utils/constants.dart';
+import 'package:vacation_time/utils/text_styles.dart';
 import 'package:vacation_time/widgets/rating_bar.dart';
 
-class Destination extends StatelessWidget {
+class Destination extends ConsumerWidget {
   const Destination({
     Key? key,
     required this.place,
@@ -12,7 +17,9 @@ class Destination extends StatelessWidget {
   final Place place;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(destinationProvider.notifier);
+    final padding = MediaQuery.of(context).viewPadding;
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -36,13 +43,20 @@ class Destination extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.only(
+                // top: padding.top * 0.5,
+                left: 24.r,
+                right: 24.r,
+                bottom: padding.bottom,
+              ),
+              // horizontal: 24.0, vertical: padding.vertical * 0.2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
-                      const SizedBox(height: 48),
+                      // const SizedBox(height: 48),
+                      48.verticalSpace,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -53,21 +67,30 @@ class Destination extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          Image.asset(IconsAssets.heart),
+                          GestureDetector(
+                            onTap: () {
+                              notifier.fav(place);
+                            },
+                            child: Image.asset(
+                              IconsAssets.heartRed,
+                              color: place.isFavourite ? null : Colors.black,
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Row(
                         children: [
                           Text(
                             place.name,
-                            style: const TextStyle(
+                            style: TextStyles.poppins(
                               color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                           const Spacer(),
@@ -75,14 +98,22 @@ class Destination extends StatelessWidget {
                           Constants.sizeW08,
                           Text(
                             place.country,
-                            style: const TextStyle(color: Colors.white),
+                            style: TextStyles.urbanist(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           )
                         ],
                       ),
                       Constants.sizeH24,
                       Text(
                         place.description,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyles.urbanist(
+                          fontSize: 12.sp,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
                       Constants.sizeH20,
                       RatingBar(
@@ -95,10 +126,10 @@ class Destination extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${place.price}/person',
-                            style: const TextStyle(
+                            '${place.price.toInt()}/person',
+                            style: TextStyles.poppins(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 14.sp,
                             ),
                           ),
                           TextButton(
@@ -106,24 +137,24 @@ class Destination extends StatelessWidget {
                             style: ButtonStyle(
                               shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(15.r),
                                 ),
                               ),
                               padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 16,
+                                EdgeInsets.symmetric(
+                                  horizontal: 20.r,
+                                  vertical: 10.r,
                                 ),
                               ),
                               backgroundColor: MaterialStateProperty.all(
                                 Constants.starIconColor,
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Book Now',
-                              style: TextStyle(
+                              style: TextStyles.urbanist(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

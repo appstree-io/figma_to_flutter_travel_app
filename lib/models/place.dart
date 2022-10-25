@@ -37,29 +37,33 @@ class Place {
       image: image ?? this.image,
     );
   }
-}
 
-const places = [
-  Place(
-    name: 'Kufa Beach',
-    country: 'Bali, Indonesia',
-    rating: 4.2,
-    isFavourite: true,
-    description:
-        'A resort is a place used for vacation, relaxation or as a day.',
-    price: 20000,
-    image:
-        'https://images.unsplash.com/photo-1590523278191-995cbcda646b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
-  ),
-  Place(
-    name: 'Baga Beach',
-    country: 'Goa, India',
-    rating: 4.8,
-    isFavourite: false,
-    description:
-        'A resort is a place used for vacation, relaxation or as a day.',
-    price: 15000,
-    image:
-        'https://unsplash.com/photos/JduZyOCGZKc/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Nnx8YmVhY2hlc3xlbnwwfHx8fDE2NjY2MDYxNzM&force=true&w=640',
-  ),
-];
+  @override
+  bool operator ==(covariant Place other) {
+    if (identical(this, other)) return true;
+
+    return other.name == name &&
+        other.country == country &&
+        other.rating == rating &&
+        other.isFavourite == isFavourite &&
+        other.description == description &&
+        other.price == price &&
+        other.image == image;
+  }
+
+  @override
+  int get hashCode {
+    return name.hashCode ^
+        country.hashCode ^
+        rating.hashCode ^
+        isFavourite.hashCode ^
+        description.hashCode ^
+        price.hashCode ^
+        image.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'Place(name: $name, country: $country, rating: $rating, isFavourite: $isFavourite, description: $description, price: $price, image: $image)';
+  }
+}

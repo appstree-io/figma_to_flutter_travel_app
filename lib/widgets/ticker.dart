@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vacation_time/utils/constants.dart';
+import 'package:vacation_time/utils/text_styles.dart';
 
 class Ticker extends StatelessWidget {
   const Ticker({Key? key, required this.title}) : super(key: key);
@@ -11,24 +13,25 @@ class Ticker extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+          style: TextStyles.inter(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
           ),
         ),
         const Spacer(),
         TextButton(
-          child: const Text(
+          child: Text(
             'See all',
-            style: TextStyle(
+            style: TextStyles.inter(
               color: Constants.lightGreyColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
             ),
           ),
           onPressed: () {},
         ),
-        Constants.sizeW18
+        // Constants.sizeW18
+        24.horizontalSpace,
       ],
     );
   }

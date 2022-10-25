@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vacation_time/models/place.dart';
 import 'package:vacation_time/utils/constants.dart';
 
@@ -24,12 +25,12 @@ class RatingBar extends StatelessWidget {
             color: rating.round().toInt() > index
                 ? Constants.starIconColor
                 : iconColor,
-            size: 20,
+            size: 20.sm,
           );
         }).toList(),
         Constants.sizeW06,
         Text(
-          '4.8',
+          '${place.rating}',
           style: TextStyle(color: textColor),
         )
       ],

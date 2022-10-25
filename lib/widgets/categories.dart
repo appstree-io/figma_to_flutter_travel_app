@@ -1,24 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:vacation_time/models/place.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:vacation_time/pages/destination.dart';
+import 'package:vacation_time/state/destination_state.dart';
 import 'package:vacation_time/utils/constants.dart';
+import 'package:vacation_time/utils/text_styles.dart';
 import 'package:vacation_time/widgets/favourite_place.dart';
 import 'package:vacation_time/widgets/rating_bar.dart';
 import 'package:vacation_time/widgets/select_category_tab.dart';
 import 'package:vacation_time/widgets/ticker.dart';
 
-class Categories extends StatelessWidget {
+class Categories extends ConsumerWidget {
   const Categories({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final places = ref.watch(destinationProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         const Ticker(title: 'Choose Category'),
+        10.verticalSpace,
         Row(
           children: const [
             SelectCategoryTab(
@@ -34,9 +41,10 @@ class Categories extends StatelessWidget {
             ),
           ],
         ),
-        Constants.sizeH24,
+        // Constants.sizeH24,
+        24.verticalSpace,
         SizedBox(
-          height: 280,
+          height: 270.sm,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: places
@@ -45,24 +53,26 @@ class Categories extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: ((context) => Destination(place: place)),
+                            builder: ((context) => Destination(
+                                  place: place,
+                                )),
                           ),
                         ),
                         child: Stack(
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               child: Image.network(
                                 place.image,
                                 fit: BoxFit.cover,
-                                height: 246,
-                                width: 186,
+                                height: 246.sm,
+                                width: 186.sm,
                               ),
                             ),
                             Positioned(
                               // alignment: AlignmentDirectional.bottomCenter,
-                              bottom: 50,
-                              left: 10,
+                              bottom: 40.h,
+                              left: 12.w,
                               child: SizedBox(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,12 +80,13 @@ class Categories extends StatelessWidget {
                                   children: [
                                     Text(
                                       place.name,
-                                      style: const TextStyle(
-                                        fontSize: 20,
+                                      style: TextStyles.poppins(
+                                        fontSize: 20.sp,
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Constants.sizeH06,
+                                    // Constants.sizeH06,
+                                    06.verticalSpace,
                                     Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -83,17 +94,20 @@ class Categories extends StatelessWidget {
                                           IconsAssets.location,
                                           // color: Colors.white,
                                         ),
-                                        Constants.sizeW04,
+                                        // Constants.sizeW04,
+                                        04.horizontalSpace,
                                         Text(
                                           place.country,
-                                          style: const TextStyle(
-                                            fontSize: 10,
+                                          style: TextStyles.urbanist(
+                                            fontSize: 12.sp,
                                             color: Colors.white,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    Constants.sizeH06,
+                                    // Constants.sizeH06,
+                                    // 06.verticalSpace,
+                                    06.verticalSpaceFromWidth,
                                     RatingBar(
                                       place: place,
                                       textColor: Colors.white,
@@ -103,7 +117,9 @@ class Categories extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            FavouritePlace(place: place)
+                            FavouritePlace(
+                              place: place,
+                            )
                           ],
                         ),
                       ),

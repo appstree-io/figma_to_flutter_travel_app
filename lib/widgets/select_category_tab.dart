@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vacation_time/utils/text_styles.dart';
 
 class SelectCategoryTab extends StatelessWidget {
   const SelectCategoryTab({
@@ -14,7 +15,7 @@ class SelectCategoryTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 02),
       decoration: BoxDecoration(
           border: Border.all(color: color),
           borderRadius: BorderRadius.circular(08)),
@@ -23,11 +24,18 @@ class SelectCategoryTab extends StatelessWidget {
           children: [
             TextSpan(
               text: emoji,
-              style: const TextStyle(fontSize: 22),
+              style: const TextStyle(fontSize: 40),
             ),
-            TextSpan(
-              text: text,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            WidgetSpan(
+              child: Text(
+                text,
+                style: TextStyles.urbanist(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              alignment: PlaceholderAlignment.top,
+              // text: text,
             ),
           ],
         ),

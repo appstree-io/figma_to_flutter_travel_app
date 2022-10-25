@@ -35,6 +35,7 @@ class Constants {
 }
 
 class IconsAssets {
+  IconsAssets._();
   static const heart = 'assets/icons/heart.png';
   static const lamp = 'assets/icons/lamp.png';
   static const heartRed = 'assets/icons/heart_red.png';

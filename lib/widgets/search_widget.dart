@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vacation_time/utils/constants.dart';
 
 class SearchWidget extends StatelessWidget {
@@ -10,10 +11,10 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(right: 24, top: 30, bottom: 30),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: EdgeInsets.only(right: 24.r, top: 30.r, bottom: 30.r),
+      padding: EdgeInsets.symmetric(horizontal: 10.r),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10.r),
           color: Constants.borderColor),
       child: const TextField(
         decoration: InputDecoration(
